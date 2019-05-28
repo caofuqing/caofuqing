@@ -7,18 +7,18 @@
   
   <title>iOS 源代码分析 --- Masonry | 曹福清</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Masonry 是 Objective-C 中用于自动布局的第三方框架, 我们一般使用它来代替冗长, 繁琐的 AutoLayout 代码.  Masonry 的使用还是很简洁的: 123456[button mas_makeConstraints:^(MASConstraintMaker *make) &amp;#123;make.centerX.equalTo(self.view);make.top.e">
+  <meta name="description" content="Masonry 是 Objective-C 中用于自动布局的第三方框架, 我们一般使用它来代替冗长, 繁琐的 AutoLayout 代码.  Masonry 的使用还是很简洁的:">
 <meta name="keywords" content="曹福清 博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS 源代码分析 --- Masonry">
 <meta property="og:url" content="http://caofuqing.com/2019/05/28/iOS-源代码分析-Masonry/index.html">
 <meta property="og:site_name" content="曹福清">
-<meta property="og:description" content="Masonry 是 Objective-C 中用于自动布局的第三方框架, 我们一般使用它来代替冗长, 繁琐的 AutoLayout 代码.  Masonry 的使用还是很简洁的: 123456[button mas_makeConstraints:^(MASConstraintMaker *make) &amp;#123;make.centerX.equalTo(self.view);make.top.e">
+<meta property="og:description" content="Masonry 是 Objective-C 中用于自动布局的第三方框架, 我们一般使用它来代替冗长, 繁琐的 AutoLayout 代码.  Masonry 的使用还是很简洁的:">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-28T09:12:31.276Z">
+<meta property="og:updated_time" content="2019-05-28T09:54:11.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 源代码分析 --- Masonry">
-<meta name="twitter:description" content="Masonry 是 Objective-C 中用于自动布局的第三方框架, 我们一般使用它来代替冗长, 繁琐的 AutoLayout 代码.  Masonry 的使用还是很简洁的: 123456[button mas_makeConstraints:^(MASConstraintMaker *make) &amp;#123;make.centerX.equalTo(self.view);make.top.e">
+<meta name="twitter:description" content="Masonry 是 Objective-C 中用于自动布局的第三方框架, 我们一般使用它来代替冗长, 繁琐的 AutoLayout 代码.  Masonry 的使用还是很简洁的:">
   
     <link rel="alternate" href="/atom.xml" title="曹福清" type="application/atom+xml">
   
@@ -96,7 +96,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><a href="https://github.com/SnapKit/Masonry" target="_blank" rel="noopener">Masonry</a> 是 Objective-C 中用于自动布局的第三方框架, 我们一般使用它来代替冗长, 繁琐的 AutoLayout 代码. </p>
-<p>Masonry 的使用还是很简洁的:</p>
+<p>Masonry 的使用还是很简洁的:<br><a id="more"></a></p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[button mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line">make.centerX.equalTo(<span class="keyword">self</span>.view);</span><br><span class="line">make.top.equalTo(<span class="keyword">self</span>.view).with.offset(<span class="number">40</span>);</span><br><span class="line">make.width.equalTo(@<span class="number">185</span>);</span><br><span class="line">make.height.equalTo(@<span class="number">38</span>);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <h2 id="从-mas-makeConstraints-开始"><a href="#从-mas-makeConstraints-开始" class="headerlink" title="从 mas_makeConstraints: 开始"></a>从 mas_makeConstraints: 开始</h2><p>其中最常用的方法就是 </p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// View+MASAdditions.h</span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSArray</span> *)mas_makeConstraints:(<span class="keyword">void</span>(^)(MASConstraintMaker *make))block;</span><br></pre></td></tr></table></figure>
@@ -204,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://caofuqing.com/2019/05/28/iOS-源代码分析-Masonry/" data-id="cjw7l97990000oq04zevqfxnt" class="article-share-link">Share</a>
+      <a data-url="http://caofuqing.com/2019/05/28/iOS-源代码分析-Masonry/" data-id="cjw7mwqpf00001j045e975e5h" class="article-share-link">Share</a>
       
       
     </footer>

@@ -7,18 +7,18 @@
   
   <title>iOS对象是如何初始化的 | 曹福清</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="+ alloc 和 - init 这一对我们在 iOS 开发中每天都要用到的初始化方法一直困扰着我, 于是笔者仔细研究了一下 objc 源码中 NSObject 如何进行初始化。 在具体分析对象的初始化过程之前，我想先放出结论，以免文章中的细枝末节对读者的理解有所影响；整个对象的初始化过程其实只是为一个分配内存空间，并且初始化 isa_t 结构体的过程。 alloc 方法分析先来看一下 + all">
+  <meta name="description" content="+ alloc 和 - init 这一对我们在 iOS 开发中每天都要用到的初始化方法一直困扰着我, 于是笔者仔细研究了一下 objc 源码中 NSObject 如何进行初始化。 在具体分析对象的初始化过程之前，我想先放出结论，以免文章中的细枝末节对读者的理解有所影响；整个对象的初始化过程其实只是为一个分配内存空间，并且初始化 isa_t 结构体的过程。">
 <meta name="keywords" content="曹福清 博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS对象是如何初始化的">
 <meta property="og:url" content="http://caofuqing.com/2018/11/18/iOS对象是如何初始化的/index.html">
 <meta property="og:site_name" content="曹福清">
-<meta property="og:description" content="+ alloc 和 - init 这一对我们在 iOS 开发中每天都要用到的初始化方法一直困扰着我, 于是笔者仔细研究了一下 objc 源码中 NSObject 如何进行初始化。 在具体分析对象的初始化过程之前，我想先放出结论，以免文章中的细枝末节对读者的理解有所影响；整个对象的初始化过程其实只是为一个分配内存空间，并且初始化 isa_t 结构体的过程。 alloc 方法分析先来看一下 + all">
+<meta property="og:description" content="+ alloc 和 - init 这一对我们在 iOS 开发中每天都要用到的初始化方法一直困扰着我, 于是笔者仔细研究了一下 objc 源码中 NSObject 如何进行初始化。 在具体分析对象的初始化过程之前，我想先放出结论，以免文章中的细枝末节对读者的理解有所影响；整个对象的初始化过程其实只是为一个分配内存空间，并且初始化 isa_t 结构体的过程。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-28T08:16:44.924Z">
+<meta property="og:updated_time" content="2019-05-28T09:54:20.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS对象是如何初始化的">
-<meta name="twitter:description" content="+ alloc 和 - init 这一对我们在 iOS 开发中每天都要用到的初始化方法一直困扰着我, 于是笔者仔细研究了一下 objc 源码中 NSObject 如何进行初始化。 在具体分析对象的初始化过程之前，我想先放出结论，以免文章中的细枝末节对读者的理解有所影响；整个对象的初始化过程其实只是为一个分配内存空间，并且初始化 isa_t 结构体的过程。 alloc 方法分析先来看一下 + all">
+<meta name="twitter:description" content="+ alloc 和 - init 这一对我们在 iOS 开发中每天都要用到的初始化方法一直困扰着我, 于是笔者仔细研究了一下 objc 源码中 NSObject 如何进行初始化。 在具体分析对象的初始化过程之前，我想先放出结论，以免文章中的细枝末节对读者的理解有所影响；整个对象的初始化过程其实只是为一个分配内存空间，并且初始化 isa_t 结构体的过程。">
   
     <link rel="alternate" href="/atom.xml" title="曹福清" type="application/atom+xml">
   
@@ -96,7 +96,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><code>+ alloc</code> 和 <code>- init</code> 这一对我们在 iOS 开发中每天都要用到的初始化方法一直困扰着我, 于是笔者仔细研究了一下 objc 源码中 <code>NSObject</code> 如何进行初始化。</p>
-<p>在具体分析对象的初始化过程之前，我想先放出结论，以免文章中的细枝末节对读者的理解有所影响；整个对象的初始化过程其实只是<strong>为一个分配内存空间，并且初始化 isa_t 结构体的过程</strong>。</p>
+<p>在具体分析对象的初始化过程之前，我想先放出结论，以免文章中的细枝末节对读者的理解有所影响；整个对象的初始化过程其实只是<strong>为一个分配内存空间，并且初始化 isa_t 结构体的过程</strong>。<br><a id="more"></a></p>
 <h2 id="alloc-方法分析"><a href="#alloc-方法分析" class="headerlink" title="alloc 方法分析"></a>alloc 方法分析</h2><p>先来看一下 <code>+ alloc</code> 方法的调用栈(在调用栈中省略了很多不必要的方法的调用):</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> _objc_rootAlloc(Class cls)</span><br><span class="line">└── <span class="keyword">static</span> <span class="keyword">id</span> callAlloc(Class cls, <span class="keyword">bool</span> checkNil, <span class="keyword">bool</span> allocWithZone=<span class="literal">false</span>)</span><br><span class="line">└── <span class="keyword">id</span> class_createInstance(Class cls, size_t extraBytes)</span><br><span class="line">└── <span class="keyword">id</span> _class_createInstanceFromZone(Class cls, size_t extraBytes, <span class="keyword">void</span> *zone, <span class="keyword">bool</span> cxxConstruct, size_t *outAllocatedSize)</span><br><span class="line">├── size_t instanceSize(size_t extraBytes)</span><br><span class="line">├── <span class="keyword">void</span>    *calloc(size_t, size_t)</span><br><span class="line">└── <span class="keyword">inline</span> <span class="keyword">void</span> objc_object::initInstanceIsa(Class cls, <span class="keyword">bool</span> hasCxxDtor)</span><br></pre></td></tr></table></figure>
 <p>这个调用栈中的方法涉及了多个文件中的代码，在下面的章节中会对调用的方法逐步进行分析，如果这个调用栈让你觉得很头疼，也不是什么问题。</p>
@@ -131,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://caofuqing.com/2018/11/18/iOS对象是如何初始化的/" data-id="cjw7l979e0002oq045s0018az" class="article-share-link">Share</a>
+      <a data-url="http://caofuqing.com/2018/11/18/iOS对象是如何初始化的/" data-id="cjw7mwqpk00021j04kdnubnpt" class="article-share-link">Share</a>
       
       
     </footer>

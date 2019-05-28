@@ -7,18 +7,18 @@
   
   <title>javascript(十) | 曹福清</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="练习讲解console.time(); 打印执行时间  注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。函数 在实际编码中，会有很多的一些代码可能重复出现，为了能简化程序开发，重复利用，所以有了函数的概念。(function功能方法，把一个个零散的带吗和数据，组合成一个完整的方法)  定义函数123456789101112function fn()">
+  <meta name="description" content="练习讲解console.time(); 打印执行时间  注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。函数 在实际编码中，会有很多的一些代码可能重复出现，为了能简化程序开发，重复利用，所以有了函数的概念。(function功能方法，把一个个零散的带吗和数据，组合成一个完整的方法)  定义函数">
 <meta name="keywords" content="曹福清 博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript(十)">
 <meta property="og:url" content="http://caofuqing.com/2019/03/21/javascript-十/index.html">
 <meta property="og:site_name" content="曹福清">
-<meta property="og:description" content="练习讲解console.time(); 打印执行时间  注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。函数 在实际编码中，会有很多的一些代码可能重复出现，为了能简化程序开发，重复利用，所以有了函数的概念。(function功能方法，把一个个零散的带吗和数据，组合成一个完整的方法)  定义函数123456789101112function fn()">
+<meta property="og:description" content="练习讲解console.time(); 打印执行时间  注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。函数 在实际编码中，会有很多的一些代码可能重复出现，为了能简化程序开发，重复利用，所以有了函数的概念。(function功能方法，把一个个零散的带吗和数据，组合成一个完整的方法)  定义函数">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-28T08:55:04.682Z">
+<meta property="og:updated_time" content="2019-05-28T09:55:55.092Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript(十)">
-<meta name="twitter:description" content="练习讲解console.time(); 打印执行时间  注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。函数 在实际编码中，会有很多的一些代码可能重复出现，为了能简化程序开发，重复利用，所以有了函数的概念。(function功能方法，把一个个零散的带吗和数据，组合成一个完整的方法)  定义函数123456789101112function fn()">
+<meta name="twitter:description" content="练习讲解console.time(); 打印执行时间  注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。函数 在实际编码中，会有很多的一些代码可能重复出现，为了能简化程序开发，重复利用，所以有了函数的概念。(function功能方法，把一个个零散的带吗和数据，组合成一个完整的方法)  定义函数">
   
     <link rel="alternate" href="/atom.xml" title="曹福清" type="application/atom+xml">
   
@@ -101,7 +101,8 @@
 <h4 id="注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。"><a href="#注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。" class="headerlink" title="注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。"></a>注意：操作了元素的innerHTML之后，元素子元素上的所有js事件都会失效，除非写的是行间事件。</h4><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><blockquote>
 <p>在实际编码中，会有很多的一些代码可能重复出现，为了能简化程序开发，重复利用，所以有了函数的概念。(function功能方法，把一个个零散的带吗和数据，组合成一个完整的方法)</p>
 </blockquote>
-<p>定义函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">alert(1);</span><br><span class="line">&#125;</span><br><span class="line">var fn2 = function()&#123;</span><br><span class="line">alert(2);</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">/*函数调用*/</span><br><span class="line">fn(); //直接调用</span><br><span class="line">document.onclick = fn2;//事件调用</span><br><span class="line">document.onclick();//2</span><br><span class="line">document.onclick();//2</span><br></pre></td></tr></table></figure></p>
+<p>定义函数<br><a id="more"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">alert(1);</span><br><span class="line">&#125;</span><br><span class="line">var fn2 = function()&#123;</span><br><span class="line">alert(2);</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">/*函数调用*/</span><br><span class="line">fn(); //直接调用</span><br><span class="line">document.onclick = fn2;//事件调用</span><br><span class="line">document.onclick();//2</span><br><span class="line">document.onclick();//2</span><br></pre></td></tr></table></figure>
 <h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><blockquote>
 <p>函数表达式 – 匿名函数自执行 </p>
 <ol>
@@ -170,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://caofuqing.com/2019/03/21/javascript-十/" data-id="cjw7l979x000loq04zkfo1ugn" class="article-share-link">Share</a>
+      <a data-url="http://caofuqing.com/2019/03/21/javascript-十/" data-id="cjw7mwqq5000m1j04oez5rt0g" class="article-share-link">Share</a>
       
       
     </footer>
