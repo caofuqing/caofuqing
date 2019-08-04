@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    #main {POSITION:relative; width:1000px; height:860px; left:50%; margin-left:-500px}
+        /*#main .test {float:left; width:320px; height:10px; margin:8px 5px; text-align:center; line-height:10px; color:#444; background-color:#dde}*/
+    #main .test {text-align:center}
+    #main .test:hover {color:#fff; background-color:#a84}
+</style>
+<title></title>
+</head>
+<body style="background-color: black">
+<canvas id='cavs' style='position:fixed; z-index:-1;'></canvas>
+<div id="main">
+    <div class=test>caofuqingdasidhaios fa为等我哈佛的安康市发送卡发卡很舒服hi我去覅哦啊是开发好看发四个覅请勿费按实际开发噶说课稿发生过福请问哦is啊哈覅欧艾斯覅是广发设计费俺师傅嘎斯发个球房间爱上is阿滑动我暗示该反思股覅是个发生过发一施工方千万别大师傅哦啊发丝四ad阿苏股份阿斯加速度覅施工方啊啊飒飒四方海峰安抚啊</div>
+    <div class=test>love</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+    <div class=test>caofuqing</div>
+
+</div>>
+</body>
+</html>
+
+<script type="text/javascript">
+var canvas = document.getElementById("cavs");
+const WIDTH = window.innerWidth;
+const HEIGHT = window.innerHeight;
+canvas.setAttribute("width", WIDTH);
+canvas.setAttribute("height", HEIGHT);
+var context = canvas.getContext("2d");
+var start =
+{
+    loves: [],
+    DURATION: 30,
+    begin: function()
+    {
+        this.createLove();
+    },
+    createLove: function()
+    {
+        for (var i = 0; i < WIDTH / 59; i++)
+        {
+            var love = new Love();
+            this.loves.push(love);
+        }
+        setInterval(this.drawLove.bind(this), this.DURATION);
+    },
+    drawLove: function()
+    {
+        context.clearRect(0, 0, WIDTH, HEIGHT);
+        for (var key in this.loves)
+        {
+            this.loves[key].draw();
+        }
+    }
+}
+function Love()
+{
+    var me = this;
+    function rand() 
+    {
+        me.maxScale = (Math.random() * 3.2 + 1.2) * WIDTH / 521;
+        me.curScale = 1.2 * WIDTH / 521;
+        me.x = Math.floor(Math.random() * WIDTH - 40);
+        me.y = Math.floor(HEIGHT - Math.random() * 200);
+        me.ColR = Math.floor(Math.random() * 255);
+        me.ColG = Math.floor(Math.random() * 255);
+        me.ColB = Math.floor(Math.random() * 255);
+        me.alpha = Math.random() * 0.2 + 0.8;
+        me.vector = Math.random() * 5 + 0.4;
+    }
+    (function(){rand();} ());
+    me.draw = function()
+    {
+        if (me.alpha < 0.01) rand();
+        if(me.curScale < me.maxScale) me.curScale += 0.3;
+        x = me.x;
+        y = me.y;
+        scale = me.curScale;
+        context.fillStyle = "rgba(" + me.ColR + "," + me.ColG + "," + me.ColB + "," + me.alpha + ")";
+        context.shadowBlur = 10;
+        context.shadowColor = "rgb(" + me.ColR + "," + me.ColG + "," + me.ColB + ")";
+        context.beginPath();
+        context.bezierCurveTo( x + 2.5*scale, y + 2.5*scale, x + 2.0*scale, y, x, y );
+        context.bezierCurveTo( x - 3.0*scale, y, x - 3.0*scale, y + 3.5*scale,x - 3.0*scale,y + 3.5*scale );
+        context.bezierCurveTo( x - 3.0*scale, y + 5.5*scale, x - 1.0*scale, y + 7.7*scale, x + 2.5*scale, y + 9.5*scale );
+        context.bezierCurveTo( x + 6.0*scale, y + 7.7*scale, x + 8.0*scale, y + 5.5*scale, x + 8.0*scale, y + 3.5*scale );
+        context.bezierCurveTo( x + 8.0*scale, y + 3.5*scale, x + 8.0*scale, y, x + 5.0*scale, y );
+        context.bezierCurveTo( x + 3.5*scale, y, x + 2.5*scale, y + 2.5*scale, x + 2.5*scale, y + 2.5*scale );
+        context.fill();
+        context.closePath();
+        me.y -= me.vector;
+        me.alpha -= (me.vector / 2.9 * 3.5 / HEIGHT);
+    }
+}
+window.onload = function()
+{
+    start.begin();
+}
+</script>
